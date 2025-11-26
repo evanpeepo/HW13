@@ -1,5 +1,9 @@
 #HW13, Evan Peepo
 
+
+# Load packages -----------------------------------------------------------
+library(ggplot2)
+
 # Load data ---------------------------------------------------------------
 
 dragons <- read.csv('dragon_data.csv')
@@ -112,6 +116,14 @@ max_lnL <- max(ss_matrix) #find max value
 which(ss_matrix == max_lnL, arr.ind = TRUE) #find the index with max value
 colnames(ss_matrix)[23] #same as grid search using sum of squares
 rownames(ss_matrix)[4] #matches lm() if rounded down
+
+#Plot 
+
+ggplot(dragons, aes(size, acres_on_fire)) +
+  geom_point() +
+  geom_abline(intercept = 0.2, slope = 1.3, color = 'blue') + #from grid search
+  geom_abline(intercept = -1.375551, slope = 1.346694, color = 'red') #from lm()
+#Intercept is different from other methods, but visually is not much different
 
 #B. Optimatization with optim()
 
